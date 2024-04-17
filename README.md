@@ -4,7 +4,9 @@ This study explores the integration of k-Nearest Neighbors (kNN) algorithm with 
 ## PCA
 To perform Principal Component Analysis (PCA) we utilized the NumPy library for all computational tasks. We first computed the covariance matrix ( $\Sigma$ ) of the dataset, denoted by $X$, using the formula: [1]
 
-$$ \sigma_{ij} = \frac{1}{n-1} \sum_{k=1}^{n} (X_{ki} - \bar{X}_i) \cdot  (X_{ki} - \bar{X}_i)$$
+\begin{equation*}
+\sigma_{ij} = \frac{1}{n-1} \sum_{k=1}^{n} (X_{ki} - \bar{X}_i) \cdot (X_{kj} - \bar{X}_j)
+\end{equation*}
 
 Next, we found the eigenvalues ( $\lambda$ ) of the covariance matrix by solving the characteristic equation [2]:
 
