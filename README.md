@@ -2,19 +2,17 @@
 This study explores the integration of k-Nearest Neighbors (kNN) algorithm with Principal Component Analysis (PCA) to accelerate learning and improve classification accuracy. The assignment tasks involve implementing a custom kNN algorithm for multi-class classification, utilizing the Social Network Ads dataset, and conducting experiments to optimize kNN parameters and assess the impact of dimensionality reduction using PCA. The tasks include training the kNN model, evaluating its performance with various k values through k-fold cross-validation, implementing PCA to reduce dataset dimensions, and assessing the effectiveness of kNN classification on different subsets of principal components. The report discusses the methodologies, results, challenges, and conclusions drawn from the experiments, providing insights into the integration of kNN and PCA for enhanced pattern recognition.
 
 ## PCA
-To perform Principal Component Analysis (PCA) we utilized the NumPy library for all computational tasks. We first computed the covariance matrix (\( \Sigma \)) of the dataset, denoted by \( X \), using the formula: [1]
+To perform Principal Component Analysis (PCA) we utilized the NumPy library for all computational tasks. We first computed the covariance matrix ($ \Sigma $) of the dataset, denoted by $ X $, using the formula: [1]
+$$ \sigma_{ij} = \frac{1}{n-1} \sum_{k=1}^{n} (X_{ki} - \bar{X}_i)(X_{kj} - \bar{X}_j) $$
 
-\[ \sigma_{ij} = \frac{1}{n-1} \sum_{k=1}^{n} (X_{ki} - \bar{X}_i)(X_{kj} - \bar{X}_j) \]
-
-Next, we found the eigenvalues (\( \lambda \)) of the covariance matrix by solving the characteristic equation [2]:
-
-\[ \text{det}(\Sigma - \lambda I) = 0 \]
+Next, we found the eigenvalues ($ \lambda $) of the covariance matrix by solving the characteristic equation [2]:
+$$ \text{det}(\Sigma - \lambda I) = 0 $$
 
 Then, for each eigenvalue, we solved the equation [2]:
 
-\[ (\Sigma - \lambda I)v = 0 \]
+$$ (\Sigma - \lambda I)v = 0 $$
 
-to find the corresponding eigenvectors (\( v \)). These eigenvectors represent the principal components of the dataset, which capture the directions of maximum variance.
+to find the corresponding eigenvectors ($ v $). These eigenvectors represent the principal components of the dataset, which capture the directions of maximum variance.
 
 ### PCA Results
 ![Scikit PCA compared with my PCA implementation and their explained variance](pca_output.png)
@@ -22,20 +20,20 @@ to find the corresponding eigenvectors (\( v \)). These eigenvectors represent t
 ## KNN
 The k-Nearest Neighbors (KNN) algorithm is a straightforward yet effective supervised learning approach primarily used for classification tasks [3]. It operates on the premise that similar data points are likely to belong to the same class. When given a new sample, KNN identifies the k nearest neighbors from the training dataset based on a chosen distance metric, such as Euclidean distance [4] [5].
 
-\[ \text{Euclidean distance}(\mathbf{p}, \mathbf{q}) = \sqrt{\sum_{i=1}^{n} (p_i - q_i)^2} \]
+$$ \text{Euclidean distance}(\mathbf{p}, \mathbf{q}) = \sqrt{\sum_{i=1}^{n} (p_i - q_i)^2} $$
 
 This formula calculates the straight-line distance between two points in Euclidean space, which is commonly used as a measure of similarity in KNN and many other machine learning algorithms.
 
-In classification tasks, the majority class among these neighbors determines the class label assigned to the new sample. The hyperparameter \( k \) plays a crucial role in KNN, as it determines the number of neighbors considered for classification. A larger value of \( k \) leads to smoother decision boundaries, while a smaller value might result in overfitting.
+In classification tasks, the majority class among these neighbors determines the class label assigned to the new sample. The hyperparameter $ k $ plays a crucial role in KNN, as it determines the number of neighbors considered for classification. A larger value of $ k $ leads to smoother decision boundaries, while a smaller value might result in overfitting.
 
 Despite its simplicity, KNN has several characteristics to consider. While it's easy to understand and implement, it can be computationally expensive during prediction, particularly for large datasets, as it requires calculating distances between the test sample and all training samples [3].
 
 ## K-Fold Crossvalidation
-Upon examining the provided cross-validation results, we observe interesting trends regarding the performance of the KNN classifier with varying \( k \) values and PCA components.
+Upon examining the provided cross-validation results, we observe interesting trends regarding the performance of the KNN classifier with varying $ k $ values and PCA components.
 
 ![K-Fold Crossvalidation of Original data (mean), pc1, pc2 and pc3](output.png)
 
-Furthermore, when considering different PCA components, such as original features, PC1, PC2, and PC3, we discern variations in mean scores for the same \( k \) value. This suggests that the choice of PCA components can significantly impact the classifier's performance. It's noteworthy that certain combinations of \( k \) and PCA components yield higher mean scores compared to others, indicating the importance of parameter selection in achieving optimal classification results.
+Furthermore, when considering different PCA components, such as original features, PC1, PC2, and PC3, we discern variations in mean scores for the same $ k $ value. This suggests that the choice of PCA components can significantly impact the classifier's performance. It's noteworthy that certain combinations of $ k $ and PCA components yield higher mean scores compared to others, indicating the importance of parameter selection in achieving optimal classification results.
 
 Interestingly, upon closer examination, we find that using PC1, PC2, and PC3 results in the same performance as using the original features. This implies that the information captured by the first three principal components is comparable to that of the original features in terms of discriminatory power for the classification task.
 
