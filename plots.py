@@ -72,7 +72,7 @@ def plot_pca(X, pca_func, y):
     np.random.seed(24)
     pca = PCA(n_components=2)
     pca.fit_transform(X)
-    reduced = pca_func(X - np.mean(X, axis=0))
+    reduced = pca_func(X - np.mean(X, axis=0), 3)
 
     components_numpy = reduced['eigenvectors']
     components_numpy = np.array([components_numpy[:, 0], -components_numpy[:, 1]])
@@ -84,7 +84,7 @@ def plot_pca(X, pca_func, y):
     components_scikit = components_scikit['matrix'].transpose()
 
     eigenvalues = np.abs(reduced['eigenvalues'])
-    explained_variance = eigenvalues / eigenvalues.sum()
+    explained_variance = eigenvalues / eigenvalues.sum(la)
 
     plt.figure(figsize=(15, 4))
     plt.subplot(1, 2, 1)
@@ -108,7 +108,7 @@ def plot_pca(X, pca_func, y):
     plt.grid(False)
     plt.subplot(1, 2, 2)
     plt.title('Explained Variance')
-    bars = plt.barh(['PCA1', 'PCA2'], explained_variance)
+    bars = plt.barh(['PCA1', 'PCA2', 'PCA3'], explained_variance)
     for bar in bars:
         width = bar.get_width()
         percentage = f'{width:.2%}'
